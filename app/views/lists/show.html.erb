@@ -1,0 +1,40 @@
+<h3><%= @list.title %></h3>
+<p><%= @list.description %></p>
+
+<% if @list.list_places.length > 0 %>
+  <ul>
+    <% @list.list_places.each do |list_place| %>
+      <% place = list_place.place %>
+      <li>
+        <p><%= place.title %></p>
+        <p><%= place.address %></p>
+        <p><%= link_to place.website %></p>
+        <p>Notes: <%= list_place.notes %></p>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
+
+<h1>
+  Add new place to this list:
+</h1>
+
+<%= form_for [@user, @list, @place], url: user_places_path(@user, @list) do |f| %>
+  <input type="hidden" name="list_place[list_id]" value="<%= @list.id %>">
+
+  <%= f.label :title %>:
+  <%= f.text_field :title %><br />
+
+  <%= f.label :address %>:
+  <%= f.text_field :address %><br />
+
+  <%= f.label :website %>:
+  <%= f.text_field :website %><br />
+
+  <%= f.label :notes %>:
+  <%= f.text_field :notes %><br />
+
+  <%= f.submit %>
+<% end %>
+
+<hr>

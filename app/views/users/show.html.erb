@@ -1,0 +1,27 @@
+<div class="hello-user">
+  <h1>Hello, <%= @user.username %></h1>
+
+  <hr>
+
+  <div class="make-new-list">
+    <h2>Create new list</h1>
+    <%= form_for [@user, @list] do |f| %>
+      <%= f.label :title %>:
+      <%= f.text_field :title %><br />
+
+      <%= f.label :description %>:
+      <%= f.text_field :description %><br />
+
+      <%= f.submit %>
+    <% end %>
+
+  </div>
+
+  <hr>
+
+  <h2>Your places lists</h1>
+
+  <% @lists.each do |list| %>
+    <p><%= link_to list.title, user_list_path(@user, list) %></p>
+  <% end %>
+</div>
